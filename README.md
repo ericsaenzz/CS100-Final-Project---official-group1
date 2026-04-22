@@ -1,7 +1,7 @@
  > As you complete each section you **must** remove the prompt text. Every *turnin* of this project includes points for formatting of this README so keep it clean and keep it up to date. 
  > Prompt text is any lines beginning with "\>"
  > Replace anything between \<...\> with your project specifics and remove angle brackets. For example, you need to name your project and replace the header right below this line with that title (no angle brackets). 
-# Maze Runner – Interactive Puzzle Adventure Game
+# Task Scheduler - Your Second Brain
  > Your author list below should include links to all members GitHub (remove existing author).
  
  > Authors: Eric Chang (https://github.com/ericsaenzz)
@@ -19,13 +19,13 @@
 > * All project phases are to be submitted to this GitHub repository. You should modify this README file to reflect the different phases of the project. In addition, you should regularly hold sprint meetings with your group. You will need to hold two to three scrum/check-in meetings with your lab TA/reader at different times in addition to the final demo.
 
 ## Project Description
-Maze Runner is a game where the player moves through a maze, avoids obstacles, collects items, and tries to reach the end. We chose this project because making a game is a fun way to practice programming and build something interactive.
+Task Scheduler is a C++ program designed to assist you in organizing your daily activities by creating task objects based on name, description, and category attributes. 
 
-We plan to use C++ to build the project. We will use classes to organize the player, the maze, the obstacles, and the overall game logic. We will also use GitHub to work together and manage the project.
+Each task can be characterized by attributes such as priority level, time, and deadlines that will assist our logic engine in organizing the plan. We use classes to organize task lists where all subtasks or child nodes are combined into one container.
 
-The input of the project will be keyboard controls from the player, such as moving up, down, left, and right. The output will be the game screen showing the player’s position, score, collected items, and whether the player wins or loses.
+The key functions will be to display, edit, delete tasks, as well as implement an effective undo mechanism utilizing the command pattern. Furthermore, we need to add functionality for sorting tasks in terms of different criteria and a unique scheduling algorithm that will suggest an optimal sequence of execution of your daily activities. 
 
-The main features of the project will include player movement, obstacles, collectible items, multiple levels, a scoring system, and win/lose conditions. If possible, we may also add save/load functionality or random maze generation. 
+The program's user interface, as in the case of the Maze Runner project, will consist of menu navigation using keyboard inputs and displaying of the current task list, prioritization, and task completion status.
  > 
  > You also need to set up an empty project board using GitHub projects (board view with default columns). Make sure you add the board under your project repository. You should also have a Product Backlog and In testing columns added. All columns should be in the right order.
  > ## Phase II
