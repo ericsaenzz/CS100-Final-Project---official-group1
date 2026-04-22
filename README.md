@@ -18,12 +18,13 @@
 > * All project phases are to be submitted to this GitHub repository. You should modify this README file to reflect the different phases of the project. In addition, you should regularly hold sprint meetings with your group. You will need to hold two to three scrum/check-in meetings with your lab TA/reader at different times in addition to the final demo.
 
 ## Project Description
- > Your project description should summarize the project you are proposing. Be sure to include:
- > * Why is it important or interesting to you?
- > * What languages/tools/technologies do you plan to use? (This list may change over the course of the project)
- > * What will be the input/output of your project?
- > * What are the features that the project provides?
- > This description should be in enough detail that the TA/instructor can determine the complexity of the project and if it is sufficient for the team members to complete in the time allotted. 
+Maze Runner is a game where the player moves through a maze, avoids obstacles, collects items, and tries to reach the end. We chose this project because making a game is a fun way to practice programming and build something interactive.
+
+We plan to use C++ to build the project. We will use classes to organize the player, the maze, the obstacles, and the overall game logic. We will also use GitHub to work together and manage the project.
+
+The input of the project will be keyboard controls from the player, such as moving up, down, left, and right. The output will be the game screen showing the player’s position, score, collected items, and whether the player wins or loses.
+
+The main features of the project will include player movement, obstacles, collectible items, multiple levels, a scoring system, and win/lose conditions. If possible, we may also add save/load functionality or random maze generation. 
  > 
  > You also need to set up an empty project board using GitHub projects (board view with default columns). Make sure you add the board under your project repository. You should also have a Product Backlog and In testing columns added. All columns should be in the right order.
  > ## Phase II
