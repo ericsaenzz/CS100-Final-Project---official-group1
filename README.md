@@ -7,7 +7,14 @@
 ### Class Diagram
 
 ![Class Diagram](1643.png)
-
+Description: The class diagram shows the relationship between four different classes 
+             that we will code: user, task, scheduler and notification. All classes 
+             have at least one association with another class. The user class represents
+             the person interacting with the system by adding/deleting tasks as well as 
+             receiving any new notification. The task class contains important information
+             such as the title,description and due date. The scheduler class handles timing 
+             and logic. Lastly, the notification class will serve to send priorities to the
+             user.
 ### Screen Layouts
 
 #### Main Menu
