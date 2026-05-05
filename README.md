@@ -2,11 +2,11 @@
 
 ### Navigation Diagram
 
-![Navigation Diagram](nav.png)
+![Navigation Diagram](images/nav.png)
 
 ### Class Diagram
 
-![Class Diagram](1643.png)
+![Class Diagram](images/1643.png)
 Description: The class diagram shows the relationship between four different classes 
              that we will code: user, task, scheduler and notification. All classes 
              have at least one association with another class. The user class represents
