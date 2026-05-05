@@ -4,6 +4,10 @@
 
 ![Navigation Diagram](nav.png)
 
+### Class Diagram
+
+![Class Diagram](1643.png)
+
 ### Screen Layouts
 
 #### Main Menu
