@@ -295,3 +295,44 @@ Undo this action? (y/n): _
 
 **Description:**  
 The Undo Last Action screen allows the user to reverse the most recent change. This supports actions such as undoing a task creation, edit, deletion, or completion update so that they don't regret their decision.
+
+
+## Project Epics
+
+### Epic 1: Task Management
+Implement core functionality for creating, editing, deleting, and viewing tasks.
+- Create task with title, description, category, deadline, priority, and time estimate
+- Edit existing task details
+- Delete tasks with confirmation
+- View tasks in a structured list
+
+### Epic 2: Subtask Management
+Enable users to break tasks into smaller components.
+- Add subtasks to a parent task
+- Edit and delete subtasks
+- Mark subtasks as complete
+- Prevent parent task completion until all subtasks are finished
+
+### Epic 3: Task Organization & Sorting
+Allow users to organize and filter tasks efficiently.
+- Sort tasks by deadline, priority, estimated time, and status
+- Display overdue tasks
+
+### Epic 4: Scheduling System
+Develop logic to generate an optimized task schedule.
+- Prioritize tasks by earliest deadline
+- Use priority level as a secondary factor
+- Use estimated time as a tiebreaker
+
+### Epic 5: Data Persistence
+Allow users to save and reload their task data.
+- Save tasks to a file
+- Load tasks from a file
+
+### Epic 6: Undo Functionality
+Provide the ability to reverse recent actions.
+- Undo task creation, deletion, and edits
+
+### Epic 7: Notifications System
+Notify users about important task updates.
+- Alert users of overdue or high-priority tasks
