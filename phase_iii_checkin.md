@@ -1,48 +1,41 @@
-Adharsh Kamalakkannan: Logic & Algorithms
+Adharsh Kamalakkannan (Quality & Logic)
 
-Task Hierarchy: Implement the core Task class and a recursive logic system where a parent task's completion status is automatically tied to its subtasks.
+Testing and Debugging: Act as the final quality gate; perform integration testing to ensure all team members' code works together.
 
-Scheduling Engine: Code the algorithm for "Generate Schedule" that sorts tasks by three layers: Deadline → Priority → Estimated Time.
+Sorting and Filtering: Develop the logic for sorting tasks by deadline, priority, time, and status.
 
-Sorting Logic: Create custom comparator functions to power the "Sort Tasks" menu (sorting by highest priority, earliest deadline, etc.).
+Subtask Management: Code the hierarchical relationship where a parent task's completion depends on its subtasks.
 
-Date Handling: Develop a helper function to convert MM/DD/YYYY strings into sortable integers or objects so the scheduler can accurately compare dates.
-
-
-
-
-John Tate: UI & Navigation
-
-Menu Controller: Build the main execution loop and the logic for navigating between all 13 unique screens.
-
-Visual Formatting: Use the <iomanip> library to create the table layouts for the "View Tasks" and "Overdue Tasks" screens, ensuring columns stay aligned regardless of text length.
-
-Input Validation: Write "bulletproof" code to handle user input—preventing the program from crashing if a user enters a letter instead of a number or an invalid date.
-
-Screen Flow: Manage the "Back" functionality (e.g., ensuring "Press Enter to return" actually takes the user back to the correct previous menu).
+Logic Support: Create the date-parsing helper functions for the rest of the team to use.
 
 
 
+Soham Mohapatra (Systems & Scheduling)
 
-Eric Chang: Commands & Undo System
+Scheduling Algorithm: Build the weighted engine that generates the "Today’s Agenda" (Deadline → Priority → Time).
 
-Command Pattern Architecture: Implement the Command interface with execute() and undo() methods to support the requirement for reversing actions.
+File Save and Load: Implement the fstream logic to save and retrieve task data from tasks.txt.
 
-Action Tracking: Create specific classes for AddTaskCommand, DeleteTaskCommand, and EditTaskCommand that store snapshots of data for the undo stack.
+Notification System: Code the class that checks the system clock and flags overdue tasks.
 
-Task Management (CRUD): Write the logic for creating, editing, and deleting task objects within the Scheduler container.
-
-Undo Stack: Maintain a std::stack of recent commands that allows the user to pop the last action and revert the task list to its previous state.
-
+Build Tools: Manage the project Makefile and overall file directory structure.
 
 
 
-Soham Mohapatra: Data & Systems
+Eric Chang (Pattern Specialist)
 
-File Persistence: Develop the Save and Load logic using std::fstream to write task data to tasks.txt and parse it back into objects when the program starts.
+Undo System: Implement the Command Pattern and the std::stack history to reverse user actions.
 
-Notification System: Build the Notification class that compares the current system date against task deadlines to trigger "Overdue" alerts.
+Task Management: Write the core CRUD (Create, Read, Update, Delete) functions for the scheduler.
 
-Build Environment: Create and maintain the Makefile to ensure all files compile correctly and manage the project folder structure.
+Data Integrity: Ensure that "Deep Copies" of tasks are made so that the Undo function always has the correct data to restore.
 
-System Integration: Implement the logic for the "View Overdue Tasks" screen by filtering the master task list against the real-time system clock.
+
+
+John Tate (Interface Lead)
+
+User Interface/Menu Navigation: Program the 13-screen navigation loop and handle the transition between menus.
+
+Visual Design: Format the terminal output (tables, headers, and spacing) to match the project's screen layouts.
+
+Input Validation: Implement robust sanitization to prevent the program from crashing on invalid user inputs (like typing letters into a number field).
