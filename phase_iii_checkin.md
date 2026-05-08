@@ -1,4 +1,5 @@
 Adharsh Kamalakkannan: Logic & Algorithms
+
 Task Hierarchy: Implement the core Task class and a recursive logic system where a parent task's completion status is automatically tied to its subtasks.
 
 Scheduling Engine: Code the algorithm for "Generate Schedule" that sorts tasks by three layers: Deadline → Priority → Estimated Time.
@@ -11,6 +12,7 @@ Date Handling: Develop a helper function to convert MM/DD/YYYY strings into sort
 
 
 John Tate: UI & Navigation
+
 Menu Controller: Build the main execution loop and the logic for navigating between all 13 unique screens.
 
 Visual Formatting: Use the <iomanip> library to create the table layouts for the "View Tasks" and "Overdue Tasks" screens, ensuring columns stay aligned regardless of text length.
@@ -23,6 +25,7 @@ Screen Flow: Manage the "Back" functionality (e.g., ensuring "Press Enter to ret
 
 
 Eric Chang: Commands & Undo System
+
 Command Pattern Architecture: Implement the Command interface with execute() and undo() methods to support the requirement for reversing actions.
 
 Action Tracking: Create specific classes for AddTaskCommand, DeleteTaskCommand, and EditTaskCommand that store snapshots of data for the undo stack.
@@ -35,6 +38,7 @@ Undo Stack: Maintain a std::stack of recent commands that allows the user to pop
 
 
 Soham Mohapatra: Data & Systems
+
 File Persistence: Develop the Save and Load logic using std::fstream to write task data to tasks.txt and parse it back into objects when the program starts.
 
 Notification System: Build the Notification class that compares the current system date against task deadlines to trigger "Overdue" alerts.
