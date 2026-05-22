@@ -7,14 +7,7 @@
 ### Class Diagram
 
 ![Class Diagram](images/CD.png)
-Description: The class diagram shows the relationship between four different classes 
-             that we will code: user, task, scheduler and notification. All classes 
-             have at least one association with another class. The user class represents
-             the person interacting with the system by adding/deleting tasks as well as 
-             receiving any new notification. The task class contains important information
-             such as the title,description and due date. The scheduler class handles timing 
-             and logic. Lastly, the notification class will serve to send priorities to the
-             user.
+Description: We updated our class diagram to better match the features shown in our screen layouts and to follow SOLID principles. The main principle we applied was the Single Responsibility Principle because we separated the program into different classes with different jobs. For example, Task stores the information for one task, Subtask handles smaller steps inside a task, TaskManager manages the list of tasks, Scheduler handles sorting and schedule generation, FileManager handles saving and loading, and UndoManager handles undo actions. We also used the Open/Closed Principle because new sorting or scheduling features can be added later through the Scheduler class without changing the main Task class. These changes make the design cleaner, easier to understand, and easier to update in the future which would help us write better code.
 ### Screen Layouts
 
 #### Main Menu
