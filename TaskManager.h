@@ -19,6 +19,9 @@ public:
 
     //read the task : display
     void viewTask();
+    
+    // task status
+    void taskStatus(int id, string newStatus);
 
     //update the task : change info on task
     void updateTask(int task_id, string task_newTitle, string task_newDesc, string task_newDueDate);

@@ -23,7 +23,18 @@ void TaskManager::viewTask() {
         cout << "\n---------------------------------\n" << endl;
     }
 }
-
+// update task status to complete, incomplete or in progress
+void TaskManager::taskStatus(int id, string newStatus) {
+    for (int i = 0; i < tasks.size(); i++) {
+ // if statement for finding id
+        if (tasks[i].task_id == id) {
+            tasks[i].task_status = newStatus;
+            cout << "Task status updated" << endl;
+            return;
+        }
+    }
+    cout << "Task not found." << endl;
+}
 
 // UPDATE the task function 
 void TaskManager::updateTask(int task_id, string newTitle, string newDescription, string task_newDueDate) {
@@ -39,7 +50,6 @@ void TaskManager::updateTask(int task_id, string newTitle, string newDescription
     }
     cout << "Task not found." << endl;
 }
-
 
 // Return task list
 vector<Task> TaskManager::getTask() {
