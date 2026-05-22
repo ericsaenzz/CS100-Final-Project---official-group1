@@ -2,7 +2,7 @@
 
 ### Navigation Diagram
 
-![Navigation Diagram](images/ND_2.png)
+![Navigation Diagram](images/ND_3.png)
 
 ### Class Diagram
 
