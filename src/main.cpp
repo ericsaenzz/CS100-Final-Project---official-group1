@@ -36,52 +36,33 @@ int main() {
 
         if (choice < 1 || choice > 13) {
             cout << "Sorry, please enter a number between 1 and 13.\n";
-            continue;
-        }
-
-        switch (choice) {
-            case 1:
-                createTask();
-                break;
-            case 2:
-                viewTasks();
-                break;
-            case 3:
-                editTask();
-                break;
-            case 4:
-                deleteTask();
-                break;
-            case 5:
-                manageSubtasks();
-                break;
-            case 6:
-                markTaskComplete();
-                break;
-            case 7:
-                sortTasks();
-                break;
-            case 8:
-                viewOverdueTasks();
-                break;
-            case 9:
-                generateSchedule();
-                break;
-            case 10:
-                saveTasks();
-                break;
-            case 11:
-                loadTasks();
-                break;
-            case 12:
-                undoLastAction();
-                break;
-            case 13:
-                cout << "Thank you for using Task Scheduler!\n";
-                running = false;
-                break;
-            default:
-                cout << "Invalid choice. Please try again.\n";
+        } else if (choice == 1) {
+            createTask();
+        } else if (choice == 2) {
+            viewTasks();
+        } else if (choice == 3) {
+            editTask();
+        } else if (choice == 4) {
+            deleteTask();
+        } else if (choice == 5) {
+            manageSubtasks();
+        } else if (choice == 6) {
+            markTaskComplete();
+        } else if (choice == 7) {
+            sortTasks();
+        } else if (choice == 8) {
+            viewOverdueTasks();
+        } else if (choice == 9) {
+            generateSchedule();
+        } else if (choice == 10) {
+            saveTasks();
+        } else if (choice == 11) {
+            loadTasks();
+        } else if (choice == 12) {
+            undoLastAction();
+        } else if (choice == 13) {
+            cout << "Thank you for using Task Scheduler!\n";
+            running = false;
         }
     }
 
