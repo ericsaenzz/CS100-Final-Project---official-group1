@@ -21,7 +21,7 @@ vector<Task> SortingFiltering::sortByPriority(vector<Task> tasks) {
 
 vector<Task> SortingFiltering::sortByEstimatedTime(vector<Task> tasks) {
     sort(tasks.begin(), tasks.end(), [](Task a, Task b) {
-        return a.task_estimatedTime < b.task_estimatedTime;
+        return a.task_duration < b.task_duration;
     });
 
     return tasks;
@@ -38,7 +38,7 @@ vector<Task> SortingFiltering::sortByStatus(vector<Task> tasks) {
 vector<Task> SortingFiltering::filterCompleted(vector<Task> tasks) {
     vector<Task> result;
 
-    for (int i = 0; i < tasks.size(); i++) {
+    for (size_t i = 0; i < tasks.size(); i++) {
         if (tasks[i].task_status == "complete") {
             result.push_back(tasks[i]);
         }
@@ -50,7 +50,7 @@ vector<Task> SortingFiltering::filterCompleted(vector<Task> tasks) {
 vector<Task> SortingFiltering::filterIncomplete(vector<Task> tasks) {
     vector<Task> result;
 
-    for (int i = 0; i < tasks.size(); i++) {
+    for (size_t i = 0; i < tasks.size(); i++) {
         if (tasks[i].task_status == "incomplete") {
             result.push_back(tasks[i]);
         }
@@ -62,7 +62,7 @@ vector<Task> SortingFiltering::filterIncomplete(vector<Task> tasks) {
 vector<Task> SortingFiltering::filterInProgress(vector<Task> tasks) {
     vector<Task> result;
 
-    for (int i = 0; i < tasks.size(); i++) {
+    for (size_t i = 0; i < tasks.size(); i++) {
         if (tasks[i].task_status == "in progress") {
             result.push_back(tasks[i]);
         }
