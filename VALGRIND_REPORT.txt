@@ -1,84 +1,14 @@
-Running main() from /Users/Adharsh/CS100-Final-Project---official-group1/_deps/googletest-src/googletest/src/gtest_main.cc
-[==========] Running 17 tests from 5 test suites.
-[----------] Global test environment set-up.
-[----------] 3 tests from TaskTest
-[ RUN      ] TaskTest.CreateTask
-[       OK ] TaskTest.CreateTask (0 ms)
-[ RUN      ] TaskTest.DefaultConstructor
-[       OK ] TaskTest.DefaultConstructor (0 ms)
-[ RUN      ] TaskTest.AllSubtasksComplete
-[       OK ] TaskTest.AllSubtasksComplete (0 ms)
-[----------] 3 tests from TaskTest (0 ms total)
-
-[----------] 1 test from SubtaskTest
-[ RUN      ] SubtaskTest.CreateSubtask
-[       OK ] SubtaskTest.CreateSubtask (0 ms)
-[----------] 1 test from SubtaskTest (0 ms total)
-
-[----------] 3 tests from TaskManagerTest
-[ RUN      ] TaskManagerTest.CreateAndRetrieveTasks
-[       OK ] TaskManagerTest.CreateAndRetrieveTasks (0 ms)
-[ RUN      ] TaskManagerTest.DeleteTask
-Task successfully deleted.
-[       OK ] TaskManagerTest.DeleteTask (0 ms)
-[ RUN      ] TaskManagerTest.UpdateTaskStatus
-Task status updated
-[       OK ] TaskManagerTest.UpdateTaskStatus (0 ms)
-[----------] 3 tests from TaskManagerTest (0 ms total)
-
-[----------] 4 tests from SchedulerTest
-[ RUN      ] SchedulerTest.SortByDeadline
-[       OK ] SchedulerTest.SortByDeadline (0 ms)
-[ RUN      ] SchedulerTest.SortByPriority
-[       OK ] SchedulerTest.SortByPriority (0 ms)
-[ RUN      ] SchedulerTest.SortByTime
-[       OK ] SchedulerTest.SortByTime (0 ms)
-[ RUN      ] SchedulerTest.GenerateSchedule
-[       OK ] SchedulerTest.GenerateSchedule (0 ms)
-[----------] 4 tests from SchedulerTest (0 ms total)
-
-[----------] 6 tests from DateHelperTest
-[ RUN      ] DateHelperTest.ValidDateFormat
-[       OK ] DateHelperTest.ValidDateFormat (0 ms)
-[ RUN      ] DateHelperTest.InvalidDateFormat
-[       OK ] DateHelperTest.InvalidDateFormat (0 ms)
-[ RUN      ] DateHelperTest.LeadingZeros
-[       OK ] DateHelperTest.LeadingZeros (0 ms)
-[ RUN      ] DateHelperTest.IsOverdue
-[       OK ] DateHelperTest.IsOverdue (0 ms)
-[ RUN      ] DateHelperTest.DaysUntilDue
-[       OK ] DateHelperTest.DaysUntilDue (0 ms)
-[ RUN      ] DateHelperTest.FebruaryDates
-[       OK ] DateHelperTest.FebruaryDates (0 ms)
-[----------] 6 tests from DateHelperTest (0 ms total)
-
-[----------] Global test environment tear-down
-[==========] 17 tests from 5 test suites ran. (1 ms total)
-[  PASSED  ] 17 tests.
-Process 88126 is not debuggable. Due to security restrictions, leaks can only show or save contents of readonly memory of restricted processes.
-
-Process:         task_scheduler_test [88126]
-Path:            /Users/USER/*/task_scheduler_test
-Load Address:    0x10030c000
-Identifier:      task_scheduler_test
-Version:         0
-Code Type:       ARM64
-Platform:        macOS
-Parent Process:  leaks [88125]
-Target Type:     live task
-
-Date/Time:       2026-06-05 14:29:25.691 -0700
-Launch Time:     2026-06-05 14:29:25.288 -0700
-OS Version:      macOS 26.3.1 (25D2128)
-Report Version:  7
-Analysis Tool:   /usr/bin/leaks
-
-Physical footprint:         3201K
-Physical footprint (peak):  3201K
-Idle exit:                  untracked
-----
-
-leaks Report Version: 4.0, multi-line stacks
-Process 88126: 213 nodes malloced for 40 KB
-Process 88126: 0 leaks for 0 total leaked bytes.
-
+==363640== Memcheck, a memory error detector
+==363640== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==363640== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==363640== Command: ./task_scheduler
+==363640== 
+==363640== 
+==363640== HEAP SUMMARY:
+==363640==     in use at exit: 0 bytes in 0 blocks
+==363640==   total heap usage: 11 allocs, 11 frees, 75,651 bytes allocated
+==363640== 
+==363640== All heap blocks were freed -- no leaks are possible
+==363640== 
+==363640== For lists of detected and suppressed errors, rerun with: -s
+==363640== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
