@@ -44,7 +44,9 @@ int main() {
 
     while (running) {
         showMenu();
-
+        
+        cin >> choice;
+        
         if (!(cin >> choice)) {
             cin.clear();
             cin.ignore(10000, '\n');
