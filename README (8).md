@@ -30,7 +30,6 @@ Description: We updated our class diagram to better match the features shown in 
 
 Enter your choice: _
 ```
-(screenshots/Screenshot 2026-06-05 124240.png)
 
 **Description:**  
 The Main Menu is the starting point of the program. The user selects an option by entering a number.
@@ -289,3 +288,141 @@ Undo this action? (y/n): _
 
 **Description:**  
 The Undo Last Action screen allows the user to reverse the most recent change. This supports actions such as undoing a task creation, edit, deletion, or completion update so that they don't regret their decision.
+
+---
+
+## Screenshots
+
+### Main Menu
+![Main Menu](screenshots/Screenshot%202026-06-05%20124240.png)
+
+### Create Task
+![Create Task](screenshots/Screenshot%202026-06-05%20124303.png)
+
+### View Tasks
+![View Tasks](screenshots/Screenshot%202026-06-05%20124349.png)
+
+### Task Details
+![Task Details](screenshots/Screenshot%202026-06-05%20124409.png)
+
+### Edit Task
+![Edit Task](screenshots/Screenshot%202026-06-05%20124434.png)
+
+### Delete Task
+![Delete Task](screenshots/Screenshot%202026-06-05%20124453.png)
+
+### Manage Subtasks
+![Manage Subtasks](screenshots/Screenshot%202026-06-05%20124458.png)
+
+### Mark Task Complete
+![Mark Task Complete](screenshots/Screenshot%202026-06-05%20125237.png)
+
+### Sort Tasks
+![Sort Tasks](screenshots/Screenshot%202026-06-05%20125241.png)
+
+### View Overdue Tasks
+![View Overdue Tasks](screenshots/Screenshot%202026-06-05%20125254.png)
+
+### Generate Schedule
+![Generate Schedule](screenshots/Screenshot%202026-06-05%20125531.png)
+
+### Save Tasks
+![Save Tasks](screenshots/Screenshot%202026-06-05%20125552.png)
+
+### Load Tasks
+![Load Tasks](screenshots/Screenshot%202026-06-05%20125720.png)
+
+---
+
+## Installation and Usage
+
+### Dependencies
+- C++17 or later
+- CMake 3.10 or later
+- Git
+
+### macOS
+
+**1. Clone the repository:**
+
+    git clone https://github.com/ericsaenzz/CS100-Final-Project---official-group1.git
+    cd CS100-Final-Project---official-group1
+
+**2. Build the project:**
+
+    cmake .
+    make
+
+**3. Run the program:**
+
+    ./task_scheduler
+
+### Linux
+
+**1. Clone the repository:**
+
+    git clone https://github.com/ericsaenzz/CS100-Final-Project---official-group1.git
+    cd CS100-Final-Project---official-group1
+
+**2. Build the project:**
+
+    cmake .
+    make
+
+**3. Run the program:**
+
+    ./task_scheduler
+
+---
+
+## Testing
+
+### Running Unit Tests
+
+    ./task_scheduler_test
+
+### Test Results
+- 17 tests across 5 test suites
+- TaskTest: CRUD operations, task creation, editing, deletion
+- SchedulerTest: sorting by deadline, priority, time, and schedule generation
+- DateHelperTest: date format validation, overdue detection, days until due
+- SubtaskTest: subtask creation, editing, completion
+- TaskManagerTest: task list management
+
+### Memory Testing
+
+    valgrind --leak-check=full --track-origins=yes ./task_scheduler
+
+Full Valgrind report available in `VALGRIND_REPORT.txt`. Results show 0 memory leaks and 0 errors.
+
+---
+
+## SOLID Principles
+
+### Single Responsibility Principle (SRP)
+
+**What we applied:** Each class in our design has one clearly defined job.
+
+**How we applied it:** We separated the program into distinct classes: `Task` stores task data, `TaskManager` handles the task list, `Scheduler` handles sorting and schedule generation, `FileManager` handles saving and loading, `UndoSystem` handles undo history, and `UserInterface` handles all user-facing input and output. Before this separation, many of these responsibilities were mixed together in a single file.
+
+**How it helped:** Each class can be modified independently without affecting others. For example, changing how tasks are saved only requires editing `FileManager`, not touching `TaskManager` or `Scheduler`. This made debugging and adding features significantly easier.
+
+---
+
+### Open/Closed Principle (OCP)
+
+**What we applied:** Classes are open for extension but closed for modification.
+
+**How we applied it:** The `Scheduler` class is designed so that new sorting algorithms or scheduling strategies can be added as new methods without modifying the existing `Task` or `TaskManager` classes. For example, we added `sortByDeadline`, `sortByPriority`, `sortByTime`, and `sortByStatus` as separate methods that all work on the same task list independently.
+
+**How it helped:** When we needed to add a new sort type, we only added a new method to `Scheduler` without touching any other class. This keeps the codebase stable and reduces the risk of introducing bugs when extending functionality.
+
+---
+
+### Interface Segregation Principle (ISP)
+
+**What we applied:** Classes only expose the methods that are relevant to their responsibility.
+
+**How we applied it:** Rather than having one large class with all functionality, we split responsibilities so that `FileManager` only exposes `saveTasks()` and `loadTasks()`, `UndoSystem` only exposes `saveState()` and `undo()`, and `Scheduler` only exposes sorting and scheduling methods. No class is forced to implement or depend on methods it does not use.
+
+**How it helped:** This keeps each class's interface small and focused. When another developer looks at `FileManager`, they immediately know it only handles file operations. This reduces confusion and makes the codebase easier to navigate and maintain.
