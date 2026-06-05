@@ -13,7 +13,7 @@ void TaskManager::viewTask() {
         return;
     }
     // for loop to loop through the vector and print each task
-    for (int i = 0; i < tasks.size(); i++) {
+    for (size_t i = 0; i < tasks.size(); i++) {
         cout<< "----------------------------------\n"<<endl;
         cout << "Task ID: " << tasks[i].task_id << endl;
         cout << "Title: " << tasks[i].task_title << endl;
@@ -25,7 +25,7 @@ void TaskManager::viewTask() {
 }
 // update task status to complete, incomplete or in progress
 void TaskManager::taskStatus(int id, string newStatus) {
-    for (int i = 0; i < tasks.size(); i++) {
+    for (size_t i = 0; i < tasks.size(); i++) {
  // if statement for finding id
         if (tasks[i].task_id == id) {
             tasks[i].task_status = newStatus;
@@ -36,9 +36,9 @@ void TaskManager::taskStatus(int id, string newStatus) {
     cout << "Task not found." << endl;
 }
 
-// UPDATE the task function 
+// UPDATE the task function
 void TaskManager::updateTask(int task_id, string newTitle, string newDescription, string task_newDueDate) {
-    for (int i = 0; i < tasks.size(); i++) {
+    for (size_t i = 0; i < tasks.size(); i++) {
 // if statement to find the task to update
         if (tasks[i].task_id == task_id) {
             tasks[i].task_title = newTitle;
@@ -57,6 +57,16 @@ vector<Task> TaskManager::getTask() {
     //returns copy of vector
 }
 
+// Update entire task
+void TaskManager::updateTaskFull(Task updatedTask) {
+    for (size_t i = 0; i < tasks.size(); i++) {
+        if (tasks[i].task_id == updatedTask.task_id) {
+            tasks[i] = updatedTask;
+            return;
+        }
+    }
+}
+
 
 // Restore old task list
 void TaskManager::restoreTask(vector<Task> oldTasks) {
@@ -67,7 +77,7 @@ void TaskManager::restoreTask(vector<Task> oldTasks) {
 
 // DELETE the selected task
 void TaskManager::deleteTask(int task_id) {
-    for (int i = 0; i < tasks.size(); i++) {
+    for (size_t i = 0; i < tasks.size(); i++) {
 // if statement to identify task
         if (tasks[i].task_id == task_id) {
 // removes tasks from the vector
