@@ -22,6 +22,7 @@ void showMenu() {
 }
 int main(){
     int number = 0;
+    int choice = 0;
     while (number != 13) {
         showMenu();
         
@@ -30,6 +31,34 @@ int main(){
         if (number < 1) return 1;
 
         if (number > 13) return 1;
+
+        if (choice == 1) {
+                createTask();
+        } else if (choice == 2) { 
+                viewTasks();
+        } else if (choice == 3) {
+                editTask();
+        } else if (choice == 4) {
+                deleteTask();
+        } else if (choice == 5) {
+                manageSubtasks();
+        } else if (choice == 6) {
+                markTaskComplete();
+        } else if (choice == 7) {
+                sortTasks();
+        } else if (choice == 8) {
+                viewOverdueTasks();
+        } else if (choice == 9) {
+                generateSchedule();
+        } else if (choice == 10) {
+                saveTasks();
+        } else if (choice == 11) {
+                loadTasks();
+        } else if (choice == 12) {
+                undoLastAction();
+        } else {
+            cout << "Thank you for using Task Scheduler!\n";
+        }
     }
     
     return 0;
