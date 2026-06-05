@@ -30,6 +30,7 @@ Description: We updated our class diagram to better match the features shown in 
 
 Enter your choice: _
 ```
+(screenshots/Screenshot 2026-06-05 124240.png)
 
 **Description:**  
 The Main Menu is the starting point of the program. The user selects an option by entering a number.
