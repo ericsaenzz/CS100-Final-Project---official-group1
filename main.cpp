@@ -27,9 +27,9 @@ int main(){
         
         cin >> number;
         
-        if (x < 1) return 1;
+        if (number < 1) return 1;
 
-        if (x > 13) return 1;
+        if (number > 13) return 1;
     }
     
     return 0;
