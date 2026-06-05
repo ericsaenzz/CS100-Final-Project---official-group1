@@ -4,9 +4,11 @@
 #include "Task.h"
 #include <vector>
 
+using namespace std;
+
 class Scheduler {
 public:
-    std::vector<Task> generateTodayAgenda(const std::vector<Task>& tasks) const;
+    vector<Task> generateTodayAgenda(vector<Task> tasks);
 };
 
 #endif

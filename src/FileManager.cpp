@@ -1,48 +1,84 @@
 #include "FileManager.h"
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
-FileManager::FileManager(const string& filename) : filename(filename) {}
+FileManager::FileManager(string file) {
+    filename = file;
+}
 
-void FileManager::saveTasks(const vector<Task>& tasks) const {
+void FileManager::saveTasks(vector<Task> tasks) {
     ofstream outFile(filename);
 
     if (!outFile) {
-        cout << "Error: Could not open " << filename << " for saving." << endl;
+        cout << "Could not open file for saving." << endl;
         return;
     }
 
-    for (const Task& task : tasks) {
-        outFile << task.toFileString() << endl;
+    for (int i = 0; i < tasks.size(); i++) {
+        outFile << tasks[i].task_id << "|"
+                << tasks[i].task_title << "|"
+                << tasks[i].task_desc << "|"
+                << tasks[i].task_dueDate << "|"
+                << tasks[i].task_status << "|"
+                << tasks[i].task_priority << "|"
+                << tasks[i].task_estimatedTime << endl;
     }
 
     outFile.close();
 
-    cout << "Tasks saved to " << filename << "." << endl;
+    cout << "Tasks saved successfully." << endl;
 }
 
-vector<Task> FileManager::loadTasks() const {
+vector<Task> FileManager::loadTasks() {
     vector<Task> tasks;
     ifstream inFile(filename);
 
     if (!inFile) {
-        cout << "No existing " << filename << " found. Starting fresh." << endl;
+        cout << "No saved file found. Starting fresh." << endl;
         return tasks;
     }
 
     string line;
 
     while (getline(inFile, line)) {
-        if (!line.empty()) {
-            tasks.push_back(Task::fromFileString(line));
+        stringstream ss(line);
+        string id;
+        string title;
+        string desc;
+        string dueDate;
+        string status;
+        string priority;
+        string estimatedTime;
+
+        getline(ss, id, '|');
+        getline(ss, title, '|');
+        getline(ss, desc, '|');
+        getline(ss, dueDate, '|');
+        getline(ss, status, '|');
+        getline(ss, priority, '|');
+        getline(ss, estimatedTime, '|');
+
+        if (id != "" && title != "" && priority != "" && estimatedTime != "") {
+            Task task(
+                stoi(id),
+                title,
+                desc,
+                dueDate,
+                status,
+                stoi(priority),
+                stoi(estimatedTime)
+            );
+
+            tasks.push_back(task);
         }
     }
 
     inFile.close();
 
-    cout << "Tasks loaded from " << filename << "." << endl;
+    cout << "Tasks loaded successfully." << endl;
 
     return tasks;
 }

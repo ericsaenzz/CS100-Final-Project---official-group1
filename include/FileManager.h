@@ -5,14 +5,17 @@
 #include <vector>
 #include <string>
 
+using namespace std;
+
 class FileManager {
 private:
-    std::string filename;
+    string filename;
 
 public:
-    FileManager(const std::string& filename = "tasks.txt");
-    void saveTasks(const std::vector<Task>& tasks) const;
-    std::vector<Task> loadTasks() const;
+    FileManager(string file = "tasks.txt");
+
+    void saveTasks(vector<Task> tasks);
+    vector<Task> loadTasks();
 };
 
 #endif

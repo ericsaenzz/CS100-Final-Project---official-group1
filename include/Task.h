@@ -2,37 +2,39 @@
 #define TASK_H
 
 #include <string>
+using namespace std;
 
 class Task {
-private:
-    int id;
-    std::string title;
-    std::string deadline;      // YYYY-MM-DD HH:MM
-    int priority;              // 1 = highest, 5 = lowest
-    int estimatedMinutes;
-    bool completed;
-
 public:
-    Task();
-    Task(int id, const std::string& title, const std::string& deadline,
-         int priority, int estimatedMinutes, bool completed = false);
+    int task_id;
+    string task_title;
+    string task_desc;
+    string task_dueDate;        
+    string task_status;        
+    int task_priority;         
+    int task_estimatedTime;
 
-    int getId() const;
-    std::string getTitle() const;
-    std::string getDeadline() const;
-    int getPriority() const;
-    int getEstimatedMinutes() const;
-    bool isCompleted() const;
 
-    void setTitle(const std::string& title);
-    void setDeadline(const std::string& deadline);
-    void setPriority(int priority);
-    void setEstimatedMinutes(int minutes);
-    void markCompleted();
+    Task() {
+        task_id = 0;
+        task_title = "";
+        task_desc = "";
+        task_dueDate = "";
+        task_status = "incomplete";
+        task_priority = 3;
+        task_estimatedTime = 0;
+    }
 
-    std::string toFileString() const;
-    static Task fromFileString(const std::string& line);
-    void display() const;
+
+    Task(int i, string t, string d, string due, string s, int p, int e) {
+        task_id = i;
+        task_title = t;
+        task_desc = d;
+        task_dueDate = due;
+        task_status = s;
+        task_priority = p;
+        task_estimatedTime = e;
+    }
 };
 
 #endif

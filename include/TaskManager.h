@@ -1,28 +1,31 @@
-#ifndef TASK_MANAGER_H
-#define TASK_MANAGER_H
+#ifndef TASKMANAGER_H
+#define TASKMANAGER_H
 
-#include "Task.h"
-#include <vector>
 #include <string>
+#include <vector>
+#include <iostream>
+#include "Task.h"
+
+using namespace std;
 
 class TaskManager {
 private:
-    std::vector<Task> tasks;
-    int nextId;
+    vector<Task> tasks;
 
 public:
-    TaskManager();
+    void createTask(Task task);
+    void viewTask();
+    void viewTaskList(vector<Task> taskList);
 
-    void setTasks(const std::vector<Task>& loadedTasks);
-    std::vector<Task> getTasks() const;
+    void taskStatus(int id, string newStatus);
 
-    void addTask(const std::string& title, const std::string& deadline,
-                 int priority, int estimatedMinutes);
-    void viewTasks() const;
-    void markTaskCompleted(int id);
+    void updateTask(int task_id, string task_newTitle, string task_newDesc, string task_newDueDate);
 
-private:
-    int findTaskIndexById(int id) const;
+    vector<Task> getTask();
+
+    void deleteTask(int task_id);
+
+    void restoreTask(vector<Task> oldTask);
 };
 
 #endif

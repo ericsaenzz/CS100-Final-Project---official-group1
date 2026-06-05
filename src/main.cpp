@@ -7,6 +7,7 @@
 #include <iostream>
 #include <limits>
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -15,14 +16,34 @@ void clearInput() {
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
 
+void displayTaskList(vector<Task> tasks) {
+    if (tasks.size() == 0) {
+        cout << "No tasks to display." << endl;
+        return;
+    }
+
+    for (int i = 0; i < tasks.size(); i++) {
+        cout << "----------------------------------" << endl;
+        cout << "Task ID: " << tasks[i].task_id << endl;
+        cout << "Title: " << tasks[i].task_title << endl;
+        cout << "Description: " << tasks[i].task_desc << endl;
+        cout << "Due Date: " << tasks[i].task_dueDate << endl;
+        cout << "Status: " << tasks[i].task_status << endl;
+        cout << "Priority: " << tasks[i].task_priority << endl;
+        cout << "Estimated Time: " << tasks[i].task_estimatedTime << " minutes" << endl;
+        cout << "----------------------------------" << endl;
+    }
+}
+
 int main() {
     TaskManager taskManager;
     FileManager fileManager("tasks.txt");
     Scheduler scheduler;
     NotificationSystem notifications;
-    SortingFiltering sortingFiltering;
+    SortingFiltering sorter;
 
-    taskManager.setTasks(fileManager.loadTasks());
+    // Load saved tasks into Eric's TaskManager
+    taskManager.restoreTask(fileManager.loadTasks());
 
     int choice = 0;
 
@@ -33,11 +54,12 @@ int main() {
         cout << "2. View All Tasks" << endl;
         cout << "3. Show Today's Agenda" << endl;
         cout << "4. Show Overdue Tasks" << endl;
-        cout << "5. Mark Task Completed" << endl;
+        cout << "5. Update Task Status" << endl;
         cout << "6. Save Tasks" << endl;
         cout << "7. Load Tasks" << endl;
         cout << "8. Sort/Filter Tasks" << endl;
-        cout << "9. Exit" << endl;
+        cout << "9. Delete Task" << endl;
+        cout << "10. Exit" << endl;
         cout << "Choose an option: ";
 
         cin >> choice;
@@ -51,63 +73,75 @@ int main() {
         clearInput();
 
         if (choice == 1) {
+            int id;
             string title;
-            string deadline;
+            string desc;
+            string dueDate;
+            string status;
             int priority;
-            int estimatedMinutes;
+            int estimatedTime;
+
+            cout << "Enter task ID: ";
+            cin >> id;
+            clearInput();
 
             cout << "Enter task title: ";
             getline(cin, title);
 
-            cout << "Enter deadline (YYYY-MM-DD HH:MM): ";
-            getline(cin, deadline);
+            cout << "Enter task description: ";
+            getline(cin, desc);
+
+            cout << "Enter due date (YYYY-MM-DD HH:MM): ";
+            getline(cin, dueDate);
+
+            cout << "Enter status (incomplete, in progress, complete): ";
+            getline(cin, status);
 
             cout << "Enter priority (1 = highest, 5 = lowest): ";
             cin >> priority;
 
             cout << "Enter estimated time in minutes: ";
-            cin >> estimatedMinutes;
+            cin >> estimatedTime;
 
             clearInput();
 
-            taskManager.addTask(title, deadline, priority, estimatedMinutes);
+            Task newTask(id, title, desc, dueDate, status, priority, estimatedTime);
+            taskManager.createTask(newTask);
+
+            cout << "Task added successfully." << endl;
         }
         else if (choice == 2) {
-            taskManager.viewTasks();
+            taskManager.viewTask();
         }
         else if (choice == 3) {
-            vector<Task> agenda = scheduler.generateTodayAgenda(taskManager.getTasks());
+            vector<Task> agenda = scheduler.generateTodayAgenda(taskManager.getTask());
 
             cout << endl;
             cout << "===== Today's Agenda =====" << endl;
-
-            if (agenda.empty()) {
-                cout << "No unfinished tasks." << endl;
-            }
-
-            for (const Task& task : agenda) {
-                task.display();
-                cout << "--------------------------" << endl;
-            }
+            displayTaskList(agenda);
         }
         else if (choice == 4) {
-            notifications.showOverdueTasks(taskManager.getTasks());
+            notifications.showOverdueTasks(taskManager.getTask());
         }
         else if (choice == 5) {
             int id;
+            string newStatus;
 
-            cout << "Enter task ID to complete: ";
+            cout << "Enter task ID: ";
             cin >> id;
-
             clearInput();
 
-            taskManager.markTaskCompleted(id);
+            cout << "Enter new status (incomplete, in progress, complete): ";
+            getline(cin, newStatus);
+
+            taskManager.taskStatus(id, newStatus);
         }
         else if (choice == 6) {
-            fileManager.saveTasks(taskManager.getTasks());
+            fileManager.saveTasks(taskManager.getTask());
         }
         else if (choice == 7) {
-            taskManager.setTasks(fileManager.loadTasks());
+            vector<Task> loadedTasks = fileManager.loadTasks();
+            taskManager.restoreTask(loadedTasks);
         }
         else if (choice == 8) {
             int sortChoice;
@@ -121,6 +155,7 @@ int main() {
             cout << "4. Sort by Status" << endl;
             cout << "5. Show Completed Tasks Only" << endl;
             cout << "6. Show Incomplete Tasks Only" << endl;
+            cout << "7. Show In Progress Tasks Only" << endl;
             cout << "Choose an option: ";
 
             cin >> sortChoice;
@@ -134,22 +169,25 @@ int main() {
             clearInput();
 
             if (sortChoice == 1) {
-                result = sortingFiltering.sortByDeadline(taskManager.getTasks());
+                result = sorter.sortByDeadline(taskManager.getTask());
             }
             else if (sortChoice == 2) {
-                result = sortingFiltering.sortByPriority(taskManager.getTasks());
+                result = sorter.sortByPriority(taskManager.getTask());
             }
             else if (sortChoice == 3) {
-                result = sortingFiltering.sortByEstimatedTime(taskManager.getTasks());
+                result = sorter.sortByEstimatedTime(taskManager.getTask());
             }
             else if (sortChoice == 4) {
-                result = sortingFiltering.sortByStatus(taskManager.getTasks());
+                result = sorter.sortByStatus(taskManager.getTask());
             }
             else if (sortChoice == 5) {
-                result = sortingFiltering.filterCompleted(taskManager.getTasks());
+                result = sorter.filterCompleted(taskManager.getTask());
             }
             else if (sortChoice == 6) {
-                result = sortingFiltering.filterIncomplete(taskManager.getTasks());
+                result = sorter.filterIncomplete(taskManager.getTask());
+            }
+            else if (sortChoice == 7) {
+                result = sorter.filterInProgress(taskManager.getTask());
             }
             else {
                 cout << "Invalid option." << endl;
@@ -158,25 +196,26 @@ int main() {
 
             cout << endl;
             cout << "===== Results =====" << endl;
-
-            if (result.empty()) {
-                cout << "No matching tasks." << endl;
-            }
-
-            for (const Task& task : result) {
-                task.display();
-                cout << "---------------------" << endl;
-            }
+            displayTaskList(result);
         }
         else if (choice == 9) {
-            fileManager.saveTasks(taskManager.getTasks());
+            int id;
+
+            cout << "Enter task ID to delete: ";
+            cin >> id;
+            clearInput();
+
+            taskManager.deleteTask(id);
+        }
+        else if (choice == 10) {
+            fileManager.saveTasks(taskManager.getTask());
             cout << "Goodbye." << endl;
         }
         else {
             cout << "Invalid option." << endl;
         }
 
-    } while (choice != 9);
+    } while (choice != 10);
 
     return 0;
 }

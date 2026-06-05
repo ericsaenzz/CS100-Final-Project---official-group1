@@ -4,10 +4,12 @@
 #include "Task.h"
 #include <vector>
 
+using namespace std;
+
 class NotificationSystem {
 public:
-    void showOverdueTasks(const std::vector<Task>& tasks) const;
-    bool isOverdue(const Task& task) const;
+    bool isOverdue(Task task);
+    void showOverdueTasks(vector<Task> tasks);
 };
 
 #endif

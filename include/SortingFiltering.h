@@ -4,15 +4,18 @@
 #include "Task.h"
 #include <vector>
 
+using namespace std;
+
 class SortingFiltering {
 public:
-    std::vector<Task> sortByDeadline(std::vector<Task> tasks) const;
-    std::vector<Task> sortByPriority(std::vector<Task> tasks) const;
-    std::vector<Task> sortByEstimatedTime(std::vector<Task> tasks) const;
-    std::vector<Task> sortByStatus(std::vector<Task> tasks) const;
+    vector<Task> sortByDeadline(vector<Task> tasks);
+    vector<Task> sortByPriority(vector<Task> tasks);
+    vector<Task> sortByEstimatedTime(vector<Task> tasks);
+    vector<Task> sortByStatus(vector<Task> tasks);
 
-    std::vector<Task> filterCompleted(const std::vector<Task>& tasks) const;
-    std::vector<Task> filterIncomplete(const std::vector<Task>& tasks) const;
+    vector<Task> filterCompleted(vector<Task> tasks);
+    vector<Task> filterIncomplete(vector<Task> tasks);
+    vector<Task> filterInProgress(vector<Task> tasks);
 };
 
 #endif

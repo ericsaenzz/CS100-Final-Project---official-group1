@@ -3,25 +3,25 @@
 
 using namespace std;
 
-vector<Task> Scheduler::generateTodayAgenda(const vector<Task>& tasks) const {
+vector<Task> Scheduler::generateTodayAgenda(vector<Task> tasks) {
     vector<Task> agenda;
 
-    for (const Task& task : tasks) {
-        if (!task.isCompleted()) {
-            agenda.push_back(task);
+    for (int i = 0; i < tasks.size(); i++) {
+        if (tasks[i].task_status != "complete") {
+            agenda.push_back(tasks[i]);
         }
     }
 
-    sort(agenda.begin(), agenda.end(), [](const Task& a, const Task& b) {
-        if (a.getDeadline() != b.getDeadline()) {
-            return a.getDeadline() < b.getDeadline();
+    sort(agenda.begin(), agenda.end(), [](Task a, Task b) {
+        if (a.task_dueDate != b.task_dueDate) {
+            return a.task_dueDate < b.task_dueDate;
         }
 
-        if (a.getPriority() != b.getPriority()) {
-            return a.getPriority() < b.getPriority();
+        if (a.task_priority != b.task_priority) {
+            return a.task_priority < b.task_priority;
         }
 
-        return a.getEstimatedMinutes() < b.getEstimatedMinutes();
+        return a.task_estimatedTime < b.task_estimatedTime;
     });
 
     return agenda;

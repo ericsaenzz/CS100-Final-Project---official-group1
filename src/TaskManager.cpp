@@ -1,66 +1,93 @@
 #include "TaskManager.h"
-#include <iostream>
-
 using namespace std;
 
-TaskManager::TaskManager() : nextId(1) {}
+void TaskManager::createTask(Task task) {
+    tasks.push_back(task);
+}
 
-void TaskManager::setTasks(const vector<Task>& loadedTasks) {
-    tasks = loadedTasks;
-    nextId = 1;
+void TaskManager::viewTask() {
+    if (tasks.size() == 0) {
+        cout << "No Tasks Available. Please try again" << endl;
+        return;
+    }
 
-    for (const Task& task : tasks) {
-        if (task.getId() >= nextId) {
-            nextId = task.getId() + 1;
-        }
+    for (int i = 0; i < tasks.size(); i++) {
+        cout << "----------------------------------" << endl;
+        cout << "Task ID: " << tasks[i].task_id << endl;
+        cout << "Title: " << tasks[i].task_title << endl;
+        cout << "Description: " << tasks[i].task_desc << endl;
+        cout << "Due Date: " << tasks[i].task_dueDate << endl;
+        cout << "Status: " << tasks[i].task_status << endl;
+        cout << "Priority: " << tasks[i].task_priority << endl;
+        cout << "Estimated Time: " << tasks[i].task_estimatedTime << " minutes" << endl;
+        cout << "----------------------------------" << endl;
     }
 }
 
-vector<Task> TaskManager::getTasks() const {
+void TaskManager::viewTaskList(vector<Task> taskList) {
+    if (taskList.size() == 0) {
+        cout << "No tasks to display." << endl;
+        return;
+    }
+
+    for (int i = 0; i < taskList.size(); i++) {
+        cout << "----------------------------------" << endl;
+        cout << "Task ID: " << taskList[i].task_id << endl;
+        cout << "Title: " << taskList[i].task_title << endl;
+        cout << "Description: " << taskList[i].task_desc << endl;
+        cout << "Due Date: " << taskList[i].task_dueDate << endl;
+        cout << "Status: " << taskList[i].task_status << endl;
+        cout << "Priority: " << taskList[i].task_priority << endl;
+        cout << "Estimated Time: " << taskList[i].task_estimatedTime << " minutes" << endl;
+        cout << "----------------------------------" << endl;
+    }
+}
+
+void TaskManager::taskStatus(int id, string newStatus) {
+    for (int i = 0; i < tasks.size(); i++) {
+        if (tasks[i].task_id == id) {
+            tasks[i].task_status = newStatus;
+            cout << "Task status updated" << endl;
+            return;
+        }
+    }
+
+    cout << "Task not found." << endl;
+}
+
+void TaskManager::updateTask(int task_id, string newTitle, string newDescription, string task_newDueDate) {
+    for (int i = 0; i < tasks.size(); i++) {
+        if (tasks[i].task_id == task_id) {
+            tasks[i].task_title = newTitle;
+            tasks[i].task_desc = newDescription;
+            tasks[i].task_dueDate = task_newDueDate;
+            cout << "Task has been successfully updated." << endl;
+            return;
+        }
+    }
+
+    cout << "Task not found." << endl;
+}
+
+
+vector<Task> TaskManager::getTask() {
     return tasks;
 }
 
-void TaskManager::addTask(const string& title, const string& deadline,
-                          int priority, int estimatedMinutes) {
-    tasks.push_back(Task(nextId, title, deadline, priority, estimatedMinutes));
-    nextId++;
 
-    cout << "Task added." << endl;
+void TaskManager::restoreTask(vector<Task> oldTasks) {
+    tasks = oldTasks;
 }
 
-void TaskManager::viewTasks() const {
-    if (tasks.empty()) {
-        cout << "No tasks available." << endl;
-        return;
-    }
 
-    cout << endl;
-    cout << "===== All Tasks =====" << endl;
-
-    for (const Task& task : tasks) {
-        task.display();
-        cout << "---------------------" << endl;
-    }
-}
-
-void TaskManager::markTaskCompleted(int id) {
-    int index = findTaskIndexById(id);
-
-    if (index == -1) {
-        cout << "Task not found." << endl;
-        return;
-    }
-
-    tasks[index].markCompleted();
-    cout << "Task marked as completed." << endl;
-}
-
-int TaskManager::findTaskIndexById(int id) const {
-    for (int i = 0; i < static_cast<int>(tasks.size()); i++) {
-        if (tasks[i].getId() == id) {
-            return i;
+void TaskManager::deleteTask(int task_id) {
+    for (int i = 0; i < tasks.size(); i++) {
+        if (tasks[i].task_id == task_id) {
+            tasks.erase(tasks.begin() + i);
+            cout << "Task successfully deleted." << endl;
+            return;
         }
     }
 
-    return -1;
+    cout << "Task not found" << endl;
 }

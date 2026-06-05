@@ -1,19 +1,18 @@
 #include "NotificationSystem.h"
-#include <chrono>
-#include <ctime>
-#include <iomanip>
 #include <iostream>
 #include <sstream>
+#include <iomanip>
+#include <ctime>
 
 using namespace std;
 
-bool NotificationSystem::isOverdue(const Task& task) const {
-    if (task.isCompleted()) {
+bool NotificationSystem::isOverdue(Task task) {
+    if (task.task_status == "complete") {
         return false;
     }
 
     tm deadlineTime = {};
-    istringstream ss(task.getDeadline());
+    istringstream ss(task.task_dueDate);
 
     ss >> get_time(&deadlineTime, "%Y-%m-%d %H:%M");
 
@@ -27,16 +26,22 @@ bool NotificationSystem::isOverdue(const Task& task) const {
     return deadline < now;
 }
 
-void NotificationSystem::showOverdueTasks(const vector<Task>& tasks) const {
+void NotificationSystem::showOverdueTasks(vector<Task> tasks) {
     bool found = false;
 
-    cout << endl;
-    cout << "===== Overdue Tasks =====" << endl;
+    cout << "\n===== Overdue Tasks =====" << endl;
 
-    for (const Task& task : tasks) {
-        if (isOverdue(task)) {
-            task.display();
+    for (int i = 0; i < tasks.size(); i++) {
+        if (isOverdue(tasks[i])) {
+            cout << "Task ID: " << tasks[i].task_id << endl;
+            cout << "Title: " << tasks[i].task_title << endl;
+            cout << "Description: " << tasks[i].task_desc << endl;
+            cout << "Due Date: " << tasks[i].task_dueDate << endl;
+            cout << "Status: " << tasks[i].task_status << endl;
+            cout << "Priority: " << tasks[i].task_priority << endl;
+            cout << "Estimated Time: " << tasks[i].task_estimatedTime << " minutes" << endl;
             cout << "-------------------------" << endl;
+
             found = true;
         }
     }

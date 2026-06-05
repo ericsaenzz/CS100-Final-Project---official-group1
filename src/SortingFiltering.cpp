@@ -3,58 +3,70 @@
 
 using namespace std;
 
-vector<Task> SortingFiltering::sortByDeadline(vector<Task> tasks) const {
-    sort(tasks.begin(), tasks.end(), [](const Task& a, const Task& b) {
-        return a.getDeadline() < b.getDeadline();
+vector<Task> SortingFiltering::sortByDeadline(vector<Task> tasks) {
+    sort(tasks.begin(), tasks.end(), [](Task a, Task b) {
+        return a.task_dueDate < b.task_dueDate;
     });
 
     return tasks;
 }
 
-vector<Task> SortingFiltering::sortByPriority(vector<Task> tasks) const {
-    sort(tasks.begin(), tasks.end(), [](const Task& a, const Task& b) {
-        return a.getPriority() < b.getPriority();
+vector<Task> SortingFiltering::sortByPriority(vector<Task> tasks) {
+    sort(tasks.begin(), tasks.end(), [](Task a, Task b) {
+        return a.task_priority < b.task_priority;
     });
 
     return tasks;
 }
 
-vector<Task> SortingFiltering::sortByEstimatedTime(vector<Task> tasks) const {
-    sort(tasks.begin(), tasks.end(), [](const Task& a, const Task& b) {
-        return a.getEstimatedMinutes() < b.getEstimatedMinutes();
+vector<Task> SortingFiltering::sortByEstimatedTime(vector<Task> tasks) {
+    sort(tasks.begin(), tasks.end(), [](Task a, Task b) {
+        return a.task_estimatedTime < b.task_estimatedTime;
     });
 
     return tasks;
 }
 
-vector<Task> SortingFiltering::sortByStatus(vector<Task> tasks) const {
-    sort(tasks.begin(), tasks.end(), [](const Task& a, const Task& b) {
-        return a.isCompleted() < b.isCompleted();
+vector<Task> SortingFiltering::sortByStatus(vector<Task> tasks) {
+    sort(tasks.begin(), tasks.end(), [](Task a, Task b) {
+        return a.task_status < b.task_status;
     });
 
     return tasks;
 }
 
-vector<Task> SortingFiltering::filterCompleted(const vector<Task>& tasks) const {
-    vector<Task> completedTasks;
+vector<Task> SortingFiltering::filterCompleted(vector<Task> tasks) {
+    vector<Task> result;
 
-    for (const Task& task : tasks) {
-        if (task.isCompleted()) {
-            completedTasks.push_back(task);
+    for (int i = 0; i < tasks.size(); i++) {
+        if (tasks[i].task_status == "complete") {
+            result.push_back(tasks[i]);
         }
     }
 
-    return completedTasks;
+    return result;
 }
 
-vector<Task> SortingFiltering::filterIncomplete(const vector<Task>& tasks) const {
-    vector<Task> incompleteTasks;
+vector<Task> SortingFiltering::filterIncomplete(vector<Task> tasks) {
+    vector<Task> result;
 
-    for (const Task& task : tasks) {
-        if (!task.isCompleted()) {
-            incompleteTasks.push_back(task);
+    for (int i = 0; i < tasks.size(); i++) {
+        if (tasks[i].task_status == "incomplete") {
+            result.push_back(tasks[i]);
         }
     }
 
-    return incompleteTasks;
+    return result;
+}
+
+vector<Task> SortingFiltering::filterInProgress(vector<Task> tasks) {
+    vector<Task> result;
+
+    for (int i = 0; i < tasks.size(); i++) {
+        if (tasks[i].task_status == "in progress") {
+            result.push_back(tasks[i]);
+        }
+    }
+
+    return result;
 }
