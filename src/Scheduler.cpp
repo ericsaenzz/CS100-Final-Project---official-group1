@@ -11,7 +11,7 @@ vector<Task> Scheduler::generateTodayAgenda(vector<Task> tasks) {
     }
     sort(agenda.begin(), agenda.end(), [](Task a, Task b) {
         if (a.task_dueDate != b.task_dueDate) return a.task_dueDate < b.task_dueDate;
-        if (a.task_priority != b.task_priority) return a.task_priority < b.task_priority;
+        if (a.task_priority != b.task_priority) return a.task_priority > b.task_priority;
         return a.task_duration < b.task_duration;
     });
     return agenda;
@@ -30,7 +30,7 @@ vector<Task> Scheduler::sortByDeadline(vector<Task> tasks) {
 
 vector<Task> Scheduler::sortByPriority(vector<Task> tasks) {
     sort(tasks.begin(), tasks.end(), [](Task a, Task b) {
-        return a.task_priority < b.task_priority;
+        return a.task_priority > b.task_priority;
     });
     return tasks;
 }
