@@ -1,14 +1,14 @@
-==363640== Memcheck, a memory error detector
-==363640== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
-==363640== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
-==363640== Command: ./task_scheduler
-==363640== 
-==363640== 
-==363640== HEAP SUMMARY:
-==363640==     in use at exit: 0 bytes in 0 blocks
-==363640==   total heap usage: 11 allocs, 11 frees, 75,651 bytes allocated
-==363640== 
-==363640== All heap blocks were freed -- no leaks are possible
-==363640== 
-==363640== For lists of detected and suppressed errors, rerun with: -s
-==363640== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==421187== Memcheck, a memory error detector
+==421187== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==421187== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==421187== Command: ./task_scheduler
+==421187== 
+==421187== 
+==421187== HEAP SUMMARY:
+==421187==     in use at exit: 0 bytes in 0 blocks
+==421187==   total heap usage: 7 allocs, 7 frees, 75,370 bytes allocated
+==421187== 
+==421187== All heap blocks were freed -- no leaks are possible
+==421187== 
+==421187== For lists of detected and suppressed errors, rerun with: -s
+==421187== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
