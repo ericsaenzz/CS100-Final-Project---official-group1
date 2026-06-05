@@ -29,11 +29,13 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 # Test executable
-add_executable(task_scheduler_test
+add_executable(
+    task_scheduler_test
     tests/TaskTest.cpp
     tests/SchedulerTest.cpp
     tests/DateHelperTest.cpp
     src/TaskManager.cpp
+    src/Scheduler.cpp
 )
 target_include_directories(task_scheduler_test PRIVATE ${PROJECT_SOURCE_DIR}/include)
 target_link_libraries(task_scheduler_test gtest gtest_main)
