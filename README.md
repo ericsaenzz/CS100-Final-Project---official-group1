@@ -1,18 +1,108 @@
-## User Interface Specification
+# Task Scheduler
 
-### Navigation Diagram
+A comprehensive C++ command-line task management application with advanced features including CRUD operations, task sorting, intelligent scheduling, subtask management, and undo functionality.
 
-![Navigation Diagram](images/ND_3.png)
+## Features
 
-### Class Diagram
+- **Create Tasks** - Add tasks with title, description, category, deadline, priority, and estimated time
+- **View Tasks** - Display all tasks in a formatted table with optional sorting
+- **Edit Tasks** - Modify any task details (title, deadline, priority, duration, etc.)
+- **Delete Tasks** - Remove tasks with confirmation prompt
+- **Manage Subtasks** - Create hierarchical tasks with parent-child relationships
+- **Mark Complete** - Track task completion status with subtask validation
+- **Sort Tasks** - Sort by deadline, priority, time, or status
+- **Generate Schedule** - Create optimized daily agenda using weighted algorithm
+- **View Overdue Tasks** - Identify tasks past their deadline
+- **Save/Load** - Persist tasks to file with automatic restoration
+- **Undo System** - Revert the last action performed
+- **Input Validation** - Comprehensive error messages for all invalid inputs
 
-![Class Diagram](images/CD.png)
-Description: We updated our class diagram to better match the features shown in our screen layouts and to follow SOLID principles. The main principle we applied was the Single Responsibility Principle because we separated the program into different classes with different jobs. For example, Task stores the information for one task, Subtask handles smaller steps inside a task, TaskManager manages the list of tasks, Scheduler handles sorting and schedule generation, FileManager handles saving and loading, and UndoManager handles undo actions. We also used the Open/Closed Principle because new sorting or scheduling features can be added later through the Scheduler class without changing the main Task class. These changes make the design cleaner, easier to understand, and easier to update in the future which would help us write better code.
-### Screen Layouts
+## Installation & Building
 
-#### Main Menu
+### Prerequisites
+- C++17 compatible compiler (MSVC, GCC, or Clang)
+- CMake 3.10 or higher
+- Windows, Linux, or macOS
 
-```text
+### Build Instructions
+
+#### Option 1: Using CMake (Recommended)
+```bash
+cmake -S . -B build
+cmake --build build --config Debug
+```
+
+#### Option 2: Using g++ (Direct Compilation)
+```bash
+g++ -std=c++17 -Wall -Iinclude -o task_scheduler.exe src/TaskManager.cpp src/UserInterface.cpp src/main.cpp
+```
+
+### Running the Application
+```bash
+# After CMake build:
+.\build\Debug\task_scheduler.exe
+
+# After direct g++ compilation:
+.\task_scheduler.exe
+```
+
+## Project Structure
+
+```
+task_scheduler/
+├── src/
+│   ├── main.cpp              # Main event loop and program entry
+│   ├── TaskManager.cpp       # CRUD operations implementation
+│   └── UserInterface.cpp     # Menu navigation and input handling
+├── include/
+│   ├── Task.h                # Task and Subtask data structures
+│   ├── TaskManager.h         # Task management interface
+│   ├── Scheduler.h           # Sorting and schedule algorithms
+│   ├── DateHelper.h          # Date validation utilities
+│   ├── FileManager.h         # File I/O operations
+│   ├── UndoSystem.h          # Undo/redo stack implementation
+│   ├── Subtask.h             # Subtask data structure
+│   └── UserInterface.h       # UI function declarations
+├── tests/
+│   ├── TaskTest.cpp          # Task and TaskManager unit tests
+│   ├── SchedulerTest.cpp     # Sorting and scheduling tests
+│   └── DateHelperTest.cpp    # Date validation tests
+├── screenshots/              # Application screenshots
+├── CMakeLists.txt            # CMake configuration
+└── README.md                 # This file
+```
+
+## Unit Testing
+
+The project includes 17 comprehensive unit tests using Google Test framework.
+
+### Running Tests
+```bash
+.\build\Debug\task_scheduler_test.exe
+```
+
+### Test Results
+✅ **17/17 tests passing**
+
+**Test Coverage:**
+- Task creation and data validation
+- Task retrieval and listing
+- Task deletion operations
+- Task status updates
+- Subtask management (add, edit, delete)
+- Subtask completion checking
+- Sorting by deadline (chronological)
+- Sorting by priority (descending)
+- Sorting by duration (ascending)
+- Schedule generation algorithm
+- Date format validation (MM/DD/YYYY)
+- Date overdue detection
+- Days until due calculation
+
+## Usage Guide
+
+### Main Menu
+```
 ========== TASK SCHEDULER ==========
 1. Create Task
 2. View Tasks
@@ -27,264 +117,212 @@ Description: We updated our class diagram to better match the features shown in 
 11. Load Tasks
 12. Undo Last Action
 13. Exit
-
-Enter your choice: _
+====================================
 ```
 
-**Description:**  
-The Main Menu is the starting point of the program. The user selects an option by entering a number.
+### Creating a Task
+
+1. Select **Option 1: Create Task**
+2. Enter task **title** (required, cannot be empty)
+3. Enter **description** (optional)
+4. Enter **category** (required, cannot be empty)
+5. Enter **deadline** in `MM/DD/YYYY` format (validated)
+6. Enter **priority level** (1-5, where 5 is highest priority)
+7. Enter **estimated completion time** in minutes (non-negative number)
+8. Confirm creation with `y` or `n`
+
+### Viewing & Sorting Tasks
+
+1. Select **Option 2: View Tasks**
+2. All tasks displayed in formatted table
+3. Choose to sort by:
+   - **1**: ID (numerical order)
+   - **2**: Title (alphabetical order)
+   - **3**: Deadline (chronological order)
+   - **4**: Priority (highest to lowest)
+   - **5**: Category (alphabetical order)
+   - **6**: Status (complete to incomplete)
+4. View details of specific task by entering its ID
+
+### Editing a Task
+
+1. Select **Option 3: Edit Task**
+2. Select task ID to modify
+3. Choose which field to edit:
+   - Title, Description, Category, Deadline, Priority, or Duration
+4. Enter new value
+5. Changes saved immediately
+
+### Scheduling Algorithm (Option 9)
+
+Generates an optimized daily agenda using multi-level sorting:
+1. **Primary:** Earliest deadline first
+2. **Secondary:** Higher priority if deadlines equal
+3. **Tertiary:** Shorter duration if deadline and priority equal
+
+### Input Validation
+
+Every input is validated with clear error messages:
+- **Menu choices:** Must be 1-13
+- **Task IDs:** Must be positive numbers
+- **Deadlines:** Must be MM/DD/YYYY format
+- **Priority:** Must be 1-5
+- **Duration:** Must be non-negative number
+- **Yes/No:** Accept only 'y', 'Y', 'n', or 'N'
+- **Required fields:** Cannot be empty
+
+Example error messages:
+```
+Sorry, please enter a number between 1 and 13.
+Sorry, invalid date format. Please use MM/DD/YYYY.
+Sorry, please enter a number between 1 and 5.
+Sorry, this field cannot be empty.
+```
+
+## Screenshots
+
+### 1. Main Menu
+![Main Menu](screenshots/1_main_menu.png)
+
+### 2. Create Task
+![Create Task](screenshots/2_create_task.png)
+
+### 3. View Tasks
+![View Tasks](screenshots/3_view_tasks.png)
+
+### 4. Sort Tasks
+![Sort Tasks](screenshots/4_sort_tasks.png)
+
+### 5. Task Details
+![Task Details](screenshots/5_task_details.png)
+
+### 6. Edit Task Menu
+![Edit Task](screenshots/6_edit_task.png)
+
+### 7. Delete Confirmation
+![Delete Task](screenshots/7_delete_task.png)
+
+### 8. Manage Subtasks
+![Manage Subtasks](screenshots/8_manage_subtasks.png)
+
+### 9. Mark Complete
+![Mark Complete](screenshots/9_mark_complete.png)
+
+### 10. Sort Options
+![Sort Menu](screenshots/10_sort_menu.png)
+
+### 11. View Overdue
+![Overdue Tasks](screenshots/11_overdue_tasks.png)
+
+### 12. Generate Schedule
+![Generate Schedule](screenshots/12_generate_schedule.png)
+
+## Data Persistence
+
+Tasks are saved to `tasks.txt` in pipe-delimited format for easy parsing:
+```
+ID|Title|Description|Category|Deadline|Priority|Duration|Status|Subtasks...
+```
+
+**Auto-save features:**
+- Save/Load via menu options
+- Subtasks preserved with parent tasks
+- All task properties retained
+
+## Implementation Highlights
+
+### Object-Oriented Design
+- **Task.h:** Encapsulates task data and subtasks vector
+- **TaskManager.h:** Manages task collection with CRUD operations
+- **Scheduler.h:** Implements sorting and scheduling algorithms
+- **DateHelper.h:** Provides date validation and calculations
+- **FileManager.h:** Handles persistent storage
+- **UndoSystem.h:** Stack-based action history
+
+### Algorithms
+- **Schedule Generation:** Weighted multi-level sort (deadline → priority → time)
+- **Date Validation:** Regex-based MM/DD/YYYY format checking
+- **Overdue Detection:** Date comparison with system date
+- **Subtask Tracking:** Completion validation before parent task completion
+
+### Input Handling
+- Retry loops for invalid input
+- Clear separation between numeric and string input
+- Buffer management for mixed cin >> and getline() operations
+- Comprehensive error messages
+
+## Testing Procedure
+
+### 1. Compile
+```bash
+cmake -S . -B build
+cmake --build build --config Debug
+```
+
+### 2. Run Unit Tests
+```bash
+.\build\Debug\task_scheduler_test.exe
+```
+Expected: All 17 tests pass ✅
+
+### 3. Run Application
+```bash
+.\build\Debug\task_scheduler.exe
+```
+
+### 4. Manual Testing Checklist
+- [ ] Create 3+ tasks with different properties
+- [ ] View tasks and verify table formatting
+- [ ] Sort tasks by each criterion (5 ways)
+- [ ] Generate schedule and verify order
+- [ ] Edit a task field and confirm update
+- [ ] Create subtasks for a task
+- [ ] Mark subtask complete, then parent task
+- [ ] Delete a task with confirmation
+- [ ] Test invalid inputs (letters for numbers, bad dates, etc.)
+- [ ] Save tasks to file
+- [ ] Close and reopen application
+- [ ] Load tasks and verify restoration
+- [ ] Undo an action
+
+## Code Quality
+
+- **Memory Management:** Stack-allocated containers (vectors, strings)
+- **No Memory Leaks:** Verified with appropriate cleanup
+- **Error Handling:** Input validation with retry loops
+- **Code Organization:** Separated UI, business logic, and data
+- **Standards Compliance:** C++17 features used appropriately
+
+## Future Enhancements
+
+- Add task search functionality
+- Implement recurring/recurring tasks
+- Add task reminders and notifications
+- Export to CSV or JSON formats
+- Add priority color coding in terminal
+- Implement task categories with filtering
+- Add performance metrics dashboard
+- Create time tracking functionality
+
+## Known Limitations
+
+- Command-line interface only (no GUI)
+- Single user (no multi-user support)
+- All tasks stored in single file
+- No cloud synchronization
+- Windows, Linux, macOS support (tested on Windows)
+
+## Contributors
+
+- Adharsh Kamalakkannan
+
+## Course Information
+
+**Course:** CS100 - Software Construction Lab  
+**Project:** Task Scheduler - Final Project  
+**Date:** Spring 2026
 
 ---
 
-#### Create Task Screen
-
-```text
-========== CREATE TASK ==========
-Task Title: Complete Research Summary
-Description: Write a short summary of research notes
-Category: School
-Deadline (MM/DD/YYYY): 06/15/2026
-Priority Level (1-5): 4
-Estimated Completion Time (minutes): 75
-
-Create this task? (y/n): _
-```
-
-**Description:**  
-The Create Task screen allows the user to enter the information needed to create a new task.
-
----
-
-#### View Tasks Screen
-
-```text
-========== VIEW TASKS ==========
-ID | Task Title                 | Deadline   | Priority | Time | Status
---------------------------------------------------------------------------
-1  | Complete Research Summary  | 06/15/2026 | 4        | 75m  | Incomplete
-2  | Clean Workspace            | 06/12/2026 | 2        | 30m  | Complete
-3  | Prepare Presentation       | 06/18/2026 | 5        | 120m | Incomplete
-
-Enter task ID to view details, or 0 to return: _
-```
-
-**Description:**  
-The View Tasks screen displays all tasks in a table format. The user can quickly see each task’s deadline, priority level, estimated time, and completion status.
-
----
-
-#### Task Details Screen
-
-```text
-========== TASK DETAILS ==========
-Task ID: 1
-Title: Complete Research Summary
-Description: Write a short summary of research notes
-Category: School
-Deadline: 06/15/2026
-Priority Level: 4
-Estimated Time: 75 minutes
-Status: Incomplete
-
-Subtasks:
-1. Review notes
-2. Write rough draft
-3. Proofread final summary
-
-Press Enter to return to View Tasks.
-```
-
-**Description:**  
-The Task Details screen shows the full information for one selected task. If the task has subtasks then it would show underneath the main task.
-
----
-
-#### Edit Task Screen
-
-```text
-========== EDIT TASK ==========
-Select task ID to edit: 1
-
-Current Task: Complete Research Summary
-
-1. Edit Title
-2. Edit Description
-3. Edit Category
-4. Edit Deadline
-5. Edit Priority Level
-6. Edit Estimated Time
-7. Return to Main Menu
-
-Enter your choice: _
-```
-
-**Description:**  
-The Edit Task screen allows the user to update an existing task by selecting which part they would like to change.
-
----
-
-#### Delete Task Screen
-
-```text
-========== DELETE TASK ==========
-Select task ID to delete: 2
-
-Task Selected: Clean Workspace
-Deadline: 06/12/2026
-Priority Level: 2
-
-Are you sure you want to delete this task? (y/n): _
-```
-
-**Description:**  
-The Delete Task screen allows the user to remove a task from the task list. A confirmation prompt is shown before deletion in case they made a mistake and they don't want to end up deleting that task.
-
----
-
-#### Manage Subtasks Screen
-
-```text
-========== MANAGE SUBTASKS ==========
-Parent Task: Prepare Presentation
-
-Current Subtasks:
-1. Create slide outline
-2. Add visuals
-3. Practice speaking notes
-
-1. Add Subtask
-2. Edit Subtask
-3. Delete Subtask
-4. Mark Subtask Complete
-5. Return to Main Menu
-
-Enter your choice: _
-```
-
-**Description:**  
-The Manage Subtasks screen allows the user to create and manage subtasks under a parent task. A parent task is not considered complete until all of its subtasks are completed.
-
----
-
-#### Mark Task Complete Screen
-
-```text
-========== MARK TASK COMPLETE ==========
-Select task ID to mark complete: 3
-
-Task Selected: Prepare Presentation
-
-All subtasks completed? No
-
-This task cannot be marked complete until all subtasks are finished.
-Press Enter to return to Main Menu.
-```
-
-**Description:**  
-The Mark Task Complete screen allows the user to update a task’s completion status. If the task has unfinished subtasks then it would not be allowed to mark as complete until every subtask has been completed.
-
----
-
-#### Sort Tasks Screen
-
-```text
-========== SORT TASKS ==========
-1. Sort by Earliest Deadline
-2. Sort by Highest Priority
-3. Sort by Estimated Completion Time
-4. Sort by Completion Status
-5. Return to Main Menu
-
-Enter your choice: _
-```
-
-**Description:**  
-The Sort Tasks screen allows the user to organize tasks using different criteria. Tasks can be sorted by categories like deadline, priority, estimated completion time, or completion status.
-
----
-
-#### View Overdue Tasks Screen
-
-```text
-========== OVERDUE TASKS ==========
-Current Date: 06/20/2026
-
-ID | Task Title                 | Deadline   | Priority | Status
-----------------------------------------------------------------
-1  | Complete Research Summary  | 06/15/2026 | 4        | Incomplete
-
-Press Enter to return to Main Menu.
-```
-
-**Description:**  
-The View Overdue Tasks screen displays incomplete tasks whose deadlines have already passed. This helps the user quickly identify tasks that need immediate attention.
-
----
-
-#### Generate Schedule Screen
-
-```text
-========== GENERATED SCHEDULE ==========
-Scheduling Method:
-1. Earliest deadline first
-2. Higher priority first if deadlines are equal
-3. Shorter estimated time first if deadline and priority are equal
-
-Today's Agenda:
-1. Complete Research Summary - Due: 06/15/2026 - Priority: 4 - Time: 75m
-2. Prepare Presentation - Due: 06/18/2026 - Priority: 5 - Time: 120m
-3. Clean Workspace - Due: 06/12/2026 - Priority: 2 - Time: 30m
-
-Press Enter to return to Main Menu.
-```
-
-**Description:**  
-The Generate Schedule screen displays a suggested order for completing tasks. The scheduling algorithm prioritizes tasks by earliest deadline, then highest priority, and then shortest estimated completion time.
-
----
-
-#### Save Tasks Screen
-
-```text
-========== SAVE TASKS ==========
-Saving task data to file...
-
-File name: tasks.txt
-
-Tasks saved successfully.
-Press Enter to return to Main Menu.
-```
-
-**Description:**  
-The Save Tasks screen stores the user’s task list in a file. This allows task data to be preserved after they decide to end the program.
-
----
-
-#### Load Tasks Screen
-
-```text
-========== LOAD TASKS ==========
-Loading task data from file...
-
-File name: tasks.txt
-
-Tasks loaded successfully.
-Press Enter to return to Main Menu.
-```
-
-**Description:**  
-The Load Tasks screen reads saved task data from a file. This allows the user to continue working with previously saved tasks.
-
----
-
-#### Undo Last Action Screen
-
-```text
-========== UNDO LAST ACTION ==========
-Last Action: Deleted task "Clean Workspace"
-
-Undo this action? (y/n): _
-```
-
-**Description:**  
-The Undo Last Action screen allows the user to reverse the most recent change. This supports actions such as undoing a task creation, edit, deletion, or completion update so that they don't regret their decision.
+**Last Updated:** June 2026  
+**Version:** 1.0 Final
