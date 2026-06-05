@@ -22,11 +22,15 @@ void showMenu() {
 }
 int main(){
     int number = 0;
-    showMenu();
-    cin >> number;
-    if (x < 1) return 1;
+    while (number != 13) {
+        showMenu();
+        
+        cin >> number;
+        
+        if (x < 1) return 1;
 
-    if (x > 13) return 1;
+        if (x > 13) return 1;
+    }
     
     return 0;
 } 
