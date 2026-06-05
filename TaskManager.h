@@ -29,10 +29,13 @@ public:
     //undo system :copy the current task list and creates copies (data integrity)
     vector<Task> getTask();
 
-    //delete the task 
+    //update entire task with new data
+    void updateTaskFull(Task updatedTask);
+
+    //delete the task
     void deleteTask(int task_id);
 
-    //restore the old task : 
+    //restore the old task :
     void restoreTask(vector<Task> oldTask);
 };
 #endif
