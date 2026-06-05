@@ -11,7 +11,7 @@ void TaskManager::viewTask() {
         return;
     }
 
-    for (int i = 0; i < tasks.size(); i++) {
+    for (size_t i = 0; i < tasks.size(); i++) {
         cout << "----------------------------------" << endl;
         cout << "Task ID: " << tasks[i].task_id << endl;
         cout << "Title: " << tasks[i].task_title << endl;
@@ -19,32 +19,28 @@ void TaskManager::viewTask() {
         cout << "Due Date: " << tasks[i].task_dueDate << endl;
         cout << "Status: " << tasks[i].task_status << endl;
         cout << "Priority: " << tasks[i].task_priority << endl;
-        cout << "Estimated Time: " << tasks[i].task_estimatedTime << " minutes" << endl;
-        cout << "----------------------------------" << endl;
-    }
-}
+        cout << "Duration: " << tasks[i].task_duration << " minutes" << endl;
+        cout << "Category: " << tasks[i].task_category << endl;
+        cout << "Subtasks: " << tasks[i].subtasks.size() << endl;
 
-void TaskManager::viewTaskList(vector<Task> taskList) {
-    if (taskList.size() == 0) {
-        cout << "No tasks to display." << endl;
-        return;
-    }
+        if (tasks[i].subtasks.size() > 0) {
+            cout << "Subtask List:" << endl;
 
-    for (int i = 0; i < taskList.size(); i++) {
-        cout << "----------------------------------" << endl;
-        cout << "Task ID: " << taskList[i].task_id << endl;
-        cout << "Title: " << taskList[i].task_title << endl;
-        cout << "Description: " << taskList[i].task_desc << endl;
-        cout << "Due Date: " << taskList[i].task_dueDate << endl;
-        cout << "Status: " << taskList[i].task_status << endl;
-        cout << "Priority: " << taskList[i].task_priority << endl;
-        cout << "Estimated Time: " << taskList[i].task_estimatedTime << " minutes" << endl;
+            for (size_t j = 0; j < tasks[i].subtasks.size(); j++) {
+                cout << "  Subtask ID: " << tasks[i].subtasks[j].subtask_id << endl;
+                cout << "  Title: " << tasks[i].subtasks[j].subtask_title << endl;
+                cout << "  Description: " << tasks[i].subtasks[j].subtask_desc << endl;
+                cout << "  Status: " << tasks[i].subtasks[j].subtask_status << endl;
+                cout << "  ----------------" << endl;
+            }
+        }
+
         cout << "----------------------------------" << endl;
     }
 }
 
 void TaskManager::taskStatus(int id, string newStatus) {
-    for (int i = 0; i < tasks.size(); i++) {
+    for (size_t i = 0; i < tasks.size(); i++) {
         if (tasks[i].task_id == id) {
             tasks[i].task_status = newStatus;
             cout << "Task status updated" << endl;
@@ -56,7 +52,7 @@ void TaskManager::taskStatus(int id, string newStatus) {
 }
 
 void TaskManager::updateTask(int task_id, string newTitle, string newDescription, string task_newDueDate) {
-    for (int i = 0; i < tasks.size(); i++) {
+    for (size_t i = 0; i < tasks.size(); i++) {
         if (tasks[i].task_id == task_id) {
             tasks[i].task_title = newTitle;
             tasks[i].task_desc = newDescription;
@@ -69,19 +65,28 @@ void TaskManager::updateTask(int task_id, string newTitle, string newDescription
     cout << "Task not found." << endl;
 }
 
-
 vector<Task> TaskManager::getTask() {
     return tasks;
 }
 
+void TaskManager::updateTaskFull(Task updatedTask) {
+    for (size_t i = 0; i < tasks.size(); i++) {
+        if (tasks[i].task_id == updatedTask.task_id) {
+            tasks[i] = updatedTask;
+            cout << "Task has been fully updated." << endl;
+            return;
+        }
+    }
+
+    cout << "Task not found." << endl;
+}
 
 void TaskManager::restoreTask(vector<Task> oldTasks) {
     tasks = oldTasks;
 }
 
-
 void TaskManager::deleteTask(int task_id) {
-    for (int i = 0; i < tasks.size(); i++) {
+    for (size_t i = 0; i < tasks.size(); i++) {
         if (tasks[i].task_id == task_id) {
             tasks.erase(tasks.begin() + i);
             cout << "Task successfully deleted." << endl;

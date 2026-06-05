@@ -31,7 +31,7 @@ void NotificationSystem::showOverdueTasks(vector<Task> tasks) {
 
     cout << "\n===== Overdue Tasks =====" << endl;
 
-    for (int i = 0; i < tasks.size(); i++) {
+    for (size_t i = 0; i < tasks.size(); i++) {
         if (isOverdue(tasks[i])) {
             cout << "Task ID: " << tasks[i].task_id << endl;
             cout << "Title: " << tasks[i].task_title << endl;
@@ -39,7 +39,9 @@ void NotificationSystem::showOverdueTasks(vector<Task> tasks) {
             cout << "Due Date: " << tasks[i].task_dueDate << endl;
             cout << "Status: " << tasks[i].task_status << endl;
             cout << "Priority: " << tasks[i].task_priority << endl;
-            cout << "Estimated Time: " << tasks[i].task_estimatedTime << " minutes" << endl;
+            cout << "Duration: " << tasks[i].task_duration << " minutes" << endl;
+            cout << "Category: " << tasks[i].task_category << endl;
+            cout << "Subtasks: " << tasks[i].subtasks.size() << endl;
             cout << "-------------------------" << endl;
 
             found = true;
