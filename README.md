@@ -26,16 +26,7 @@ A comprehensive C++ command-line task management application with advanced featu
 
 ### Build Instructions
 
-#### Option 1: Using CMake (Recommended)
-```bash
-cmake -S . -B build
-cmake --build build --config Debug
-```
-
-#### Option 2: Using g++ (Direct Compilation)
-```bash
-g++ -std=c++17 -Wall -Iinclude -o task_scheduler.exe src/TaskManager.cpp src/UserInterface.cpp src/main.cpp
-```
+# cmake .
 
 ### Running the Application
 ```bash
