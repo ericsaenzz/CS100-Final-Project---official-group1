@@ -1,4 +1,3 @@
-cat > src/Scheduler.cpp << 'EOF'
 #include "Scheduler.h"
 #include <algorithm>
 using namespace std;
@@ -59,4 +58,3 @@ vector<Task> Scheduler::getOverdueTasks(vector<Task> tasks) {
     }
     return overdue;
 }
-EOF
